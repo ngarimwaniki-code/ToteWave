@@ -1,0 +1,17 @@
+Django
+djangorestframework
+djangorestframework-simplejwt
+django-cors-headers
+django-filter
+django-storages
+Pillow
+python-dotenv
+stripe
+boto3
+gunicorn
+whitenoise
+celery
+redis
+django-redis
+mysqlclient
+webauthn

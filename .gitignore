@@ -1,0 +1,57 @@
+# Python cache files
+pycache/
+*.py[cod]
+
+# Byte-compiled files
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+env/
+venv/
+ENV/
+.venv/
+nexis-opt/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Distribution / packaging
+.Python
+build/
+dist/
+*.egg-info/
+
+# Log files
+*.log
+
+# Sensitive files
+*.env
+*.secret
+
+# Miscellaneous
+*.DS_Store
+*.db
+*.sqlite3
+*.egg
+
+# Exclude specific directories
+backend/nexis-opt/lib64/
+backend/nexis-opt/bin/python
+
+# Other temporary files
+*.tmp
+*.bak
+*.orig
+
+#Redis
+*.rdb
+
+node_modules/
