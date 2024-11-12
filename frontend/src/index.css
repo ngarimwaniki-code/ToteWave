@@ -1,117 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
- 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
- 
-    --primary: 231 48% 48%;
-    --primary-foreground: 0 0% 100%;
- 
-    --secondary: 52 100% 50%;
-    --secondary-foreground: 0 0% 0%;
- 
-    --accent: 16 100% 65%;
-    --accent-foreground: 0 0% 100%;
- 
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
- 
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
- 
-    --radius: 0.5rem;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.75rem;
+    --admin-primary: 221.2 83.2% 53.3%;
+    --admin-secondary: 222.2 47.4% 11.2%;
+    --admin-accent: 210 40% 96.1%;
   }
- 
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
- 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
- 
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
- 
-    --primary: 231 48% 48%;
-    --primary-foreground: 0 0% 100%;
- 
-    --secondary: 52 100% 50%;
-    --secondary-foreground: 0 0% 0%;
- 
-    --accent: 16 100% 65%;
-    --accent-foreground: 0 0% 100%;
- 
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
- 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
- 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --ring: 224.3 76.3% 48%;
+    --admin-primary: 217.2 91.2% 59.8%;
+    --admin-secondary: 210 40% 98%;
+    --admin-accent: 217.2 32.6% 17.5%;
   }
-}
- 
-@layer base {
+
+  /* Keyframes */
+  @keyframes shimmer {
+    100% { transform: translateX(100%); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes slide-down {
+    0% { transform: translateY(-10px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+
+  /* Global Base Styles */
   * {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    @apply bg-background text-foreground min-h-screen;
   }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+  h1 { @apply text-4xl font-bold md:text-5xl lg:text-6xl; }
+  h2 { @apply text-3xl font-bold md:text-4xl lg:text-5xl; }
+  h3 { @apply text-2xl font-bold md:text-3xl lg:text-4xl; }
+  h4 { @apply text-xl font-bold md:text-2xl lg:text-3xl; }
+  h5 { @apply text-lg font-bold md:text-xl lg:text-2xl; }
+  h6 { @apply text-base font-bold md:text-lg lg:text-xl; }
 
-  /* Custom Scrollbar Styling */
+  /* Scrollbar Styles */
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
-
   ::-webkit-scrollbar-track {
-    background: hsl(var(--background));
-    border-radius: var(--radius);
+    @apply bg-secondary/50 rounded-full;
   }
-
   ::-webkit-scrollbar-thumb {
-    background: hsl(var(--primary));
-    border-radius: var(--radius);
-    border: 2px solid hsl(var(--background));
+    @apply bg-primary/50 rounded-full transition-colors hover:bg-primary/70;
   }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--primary) / 0.8);
+  /* Selection */
+  ::selection {
+    @apply bg-primary/20 text-primary;
   }
 
-  .dark ::-webkit-scrollbar-track {
-    background: hsl(var(--background));
+  /* Smooth Scrolling */
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  /* Dropdown Menu */
+  .nav-dropdown {
+    @apply invisible opacity-0 absolute top-full left-0 w-48 bg-background shadow-lg rounded-md overflow-hidden transition-all duration-200 ease-in-out;
+  }
+  .group:hover .nav-dropdown {
+    @apply visible opacity-100;
+  }
+  .nav-link {
+    @apply px-4 py-2 text-sm text-foreground hover:bg-accent transition-colors duration-200;
+  }
+  .nav-button {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2;
   }
 
-  .dark ::-webkit-scrollbar-thumb {
-    background: hsl(var(--primary));
-    border: 2px solid hsl(var(--background));
+  /* Card Styles */
+  .card-3d {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  .variant-card {
+    @apply relative p-4 rounded-lg border bg-white transition-all duration-300;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Form Grid */
+  .form-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+  }
+  .input-group {
+    @apply space-y-2;
+  }
+
+  /* Image Upload */
+  .image-upload-area {
+    @apply relative border-2 border-dashed rounded-lg p-6 transition-all duration-300
+           hover:border-primary/50 hover:bg-primary/5;
+  }
+  .preview-image-container {
+    @apply relative rounded-lg overflow-hidden border transition-transform duration-300
+           hover:scale-105 hover:shadow-md;
+  }
+
+  /* Cart Preview */
+  .cart-preview {
+    @apply invisible opacity-0 absolute right-0 top-full mt-2 w-80 rounded-lg bg-background shadow-lg ring-1 ring-border focus:outline-none transition-all duration-200;
+  }
+  .group:hover .cart-preview {
+    @apply visible opacity-100;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply px-4 py-2 bg-primary text-primary-foreground rounded-md hover:opacity-90 transition-opacity focus:ring-2 focus:ring-primary/50 focus:outline-none;
+  }
+  .btn-secondary {
+    @apply px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:opacity-90 transition-opacity;
+  }
+  .btn-outline {
+    @apply px-4 py-2 border-2 border-primary text-primary rounded-md hover:bg-primary hover:text-primary-foreground;
+  }
+  .btn-ghost {
+    @apply px-4 py-2 text-primary hover:bg-primary/10 rounded-md;
+  }
+
+  /* Input Styles */
+  .input-base {
+    @apply px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary w-full bg-background text-foreground placeholder:text-muted-foreground;
   }
 }
 
 @layer utilities {
-  .animate-slide-in {
-    animation: slide-in-right 0.3s ease-out;
-  }
-  
-  .animate-fade {
-    animation: fade-in 0.5s ease-out;
-  }
+  /* Utility Classes */
+  .flex-center { @apply flex items-center justify-center; }
+  .grid-center { @apply grid place-items-center; }
+  .focus-ring { @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2; }
+  .text-gradient { @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary; }
+  .shadow-soft { @apply shadow-lg shadow-primary/5; }
+  .shadow-hard { @apply shadow-2xl shadow-primary/10; }
+
+  /* Animation Utilities */
+  .animate-shimmer { animation: shimmer 2s infinite; }
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-slide-down { animation: slide-down 0.2s ease-out; }
+  .animate-fade-in { animation: fade-in 0.5s ease-out; }
+  .animate-slide-in { animation: slideIn 0.3s ease-out; }
 }
