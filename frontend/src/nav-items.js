@@ -1,4 +1,19 @@
-import { Home, ShoppingBag, PackageIcon, ShoppingCartIcon, Heart, Tag, Gift, Package } from "lucide-react"; 
+import { 
+  Home, 
+  ShoppingBag, 
+  PackageIcon, 
+  ShoppingCartIcon, 
+  Heart, 
+  Tag, 
+  Gift, 
+  Package,
+  Award,
+  Percent,
+  LayoutDashboard,
+  Box,
+  List,
+  Users
+} from "lucide-react";
 import { lazy } from "react";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
 
@@ -13,6 +28,11 @@ const Deals = lazy(() => import("@/pages/Deals"));
 const GiftCards = lazy(() => import("@/pages/GiftCards"));
 const Login = lazy(() => import("@/pages/Login"));
 const Register = lazy(() => import("@/pages/Register"));
+const Loyalty = lazy(() => import("@/pages/Loyalty"));
+const Promotions = lazy(() => import("@/pages/Promotions"));
+const AdminDashboard = lazy(() => import("@/pages/AdminDashboard"));
+const AdminInventory = lazy(() => import("@/pages/AdminInventory"));
+const AdminUsers = lazy(() => import("@/pages/AdminUsers"));
 
 export const navItems = [
   {
@@ -29,7 +49,12 @@ export const navItems = [
     icon: <ShoppingBag className="h-4 w-4" />,
     page: <Products />,
     protected: false,
-    adminOnly: false
+    adminOnly: false,
+    children: [
+      { title: "New Arrivals", to: "/products/new-arrivals" },
+      { title: "Best Sellers", to: "/products/best-sellers" },
+      { title: "Sale", to: "/products/sale" }
+    ]
   },
   {
     title: "Deals",
@@ -64,6 +89,35 @@ export const navItems = [
     adminOnly: false
   },
   {
+    title: "Loyalty Points",
+    to: "/loyalty",
+    icon: <Award className="h-4 w-4" />,
+    page: <Loyalty />,
+    protected: true,
+    adminOnly: false
+  },
+  {
+    title: "Promotions",
+    to: "/promotions",
+    icon: <Percent className="h-4 w-4" />,
+    page: <Promotions />,
+    protected: false,
+    adminOnly: false
+  },
+  // Admin routes
+  {
+    title: "Dashboard",
+    to: "/admin/dashboard",
+    icon: <LayoutDashboard className="h-4 w-4" />,
+    page: (
+      <AdminProtectedRoute>
+        <AdminDashboard />
+      </AdminProtectedRoute>
+    ),
+    protected: true,
+    adminOnly: true
+  },
+  {
     title: "Manage Products",
     to: "/admin/products",
     icon: <PackageIcon className="h-4 w-4" />,
@@ -76,12 +130,36 @@ export const navItems = [
     adminOnly: true
   },
   {
+    title: "Inventory",
+    to: "/admin/inventory",
+    icon: <Box className="h-4 w-4" />,
+    page: (
+      <AdminProtectedRoute>
+        <AdminInventory />
+      </AdminProtectedRoute>
+    ),
+    protected: true,
+    adminOnly: true
+  },
+  {
     title: "Manage Orders",
     to: "/admin/orders",
     icon: <ShoppingCartIcon className="h-4 w-4" />,
     page: (
       <AdminProtectedRoute>
         <AdminOrders />
+      </AdminProtectedRoute>
+    ),
+    protected: true,
+    adminOnly: true
+  },
+  {
+    title: "Manage Users",
+    to: "/admin/users",
+    icon: <Users className="h-4 w-4" />,
+    page: (
+      <AdminProtectedRoute>
+        <AdminUsers />
       </AdminProtectedRoute>
     ),
     protected: true,
