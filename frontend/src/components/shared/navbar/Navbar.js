@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, ShoppingBag, User, ChevronDown } from "lucide-react";
+import { Menu, X, User, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { navItems } from "@/nav-items";
 import {
@@ -37,9 +37,7 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed w-full z-50 top-0 transition-all duration-300 ${
-        isScrolled 
-          ? "bg-background/95 border-b shadow-sm backdrop-blur-sm" 
-          : "bg-background/90 backdrop-blur-sm"
+        isScrolled ? "bg-background border-b shadow-sm" : "bg-background/95 backdrop-blur-sm"
       }`}
     >
       <div className="container mx-auto px-4">
@@ -72,34 +70,14 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-2">
-            <div className="relative group">
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="relative hover:bg-accent/50"
-              >
-                <ShoppingBag className="h-4 w-4" />
-                {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 h-4 w-4 text-xs flex items-center justify-center bg-primary text-primary-foreground rounded-full">
-                    {cartCount}
-                  </span>
-                )}
-              </Button>
-              <CartPreview cartCount={cartCount} />
-            </div>
+            <CartPreview cartCount={cartCount} />
 
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button 
-                    variant="ghost" 
-                    className="relative h-8 w-8 rounded-full hover:bg-accent/50"
-                  >
-                    <Avatar className="h-8 w-8 ring-2 ring-primary/10">
-                      <AvatarImage 
-                        src={`https://api.dicebear.com/7.x/initials/svg?seed=${user.name || 'User'}`} 
-                        alt={user.name} 
-                      />
+                  <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage src={`https://api.dicebear.com/7.x/initials/svg?seed=${user.name || 'User'}`} alt={user.name} />
                       <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
                     </Avatar>
                   </Button>
